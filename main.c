@@ -18,9 +18,14 @@ stNodo * agregarUltimo (stNodo * lista, stNodo * nuevoNodo);
 stNodo * buscarUltimo(stNodo * lista);
 void mostrarLista(stNodo * lista);
 void mostrarListaRecursivo(stNodo * lista);
+int contaNodos(stNodo * lista);
+
 
 int main()
 {
+    //VARIABLES
+    int i;
+
     //PUNTO 1 Crear una lista enlazada de números enteros positivos al azar, la inserción se realiza por el último nodo.
     stNodo * lista = inicLista();
     lista = cargarListaRand(lista);
@@ -32,6 +37,9 @@ int main()
     printf("\nDE DERECHA A IZQUIERDA \n");
     mostrarListaRecursivo(lista);
 
+    //PUNTO 3
+    i = contaNodos(lista);
+    printf("\n\nCantidad de nodos en lista: %i\n", i);
 
     return 0;
 }
@@ -123,6 +131,21 @@ void mostrarListaRecursivo(stNodo * lista)
         mostrarListaRecursivo(aux->siguiente);
         printf("| %i | ", aux->num);
 
-        }
+    }
 
+}
+
+int contaNodos(stNodo * lista)
+{
+    stNodo * aux = lista;
+    int i=0;
+
+    while (aux !=NULL)
+    {
+
+        i++;
+        aux = aux->siguiente;
+
+    }
+    return i;
 }
