@@ -19,14 +19,16 @@ stNodo * buscarUltimo(stNodo * lista);
 void mostrarLista(stNodo * lista);
 void mostrarListaRecursivo(stNodo * lista);
 int contaNodos(stNodo * lista);
-
+stNodo * borrarNodoPosi(stNodo * lista, int posi);
 
 int main()
 {
     //VARIABLES
-    int i;
+    int validos;
+    int posi;
+    int loop = 0;
 
-    //PUNTO 1 Crear una lista enlazada de números enteros positivos al azar, la inserción se realiza por el último nodo.
+    //PUNTO 1 Crear una lista enlazada de nï¿½meros enteros positivos al azar, la inserciï¿½n se realiza por el ï¿½ltimo nodo.
     stNodo * lista = inicLista();
     lista = cargarListaRand(lista);
     printf("DE IZQUIERDA A DERECHA \n");
@@ -38,8 +40,28 @@ int main()
     mostrarListaRecursivo(lista);
 
     //PUNTO 3
-    i = contaNodos(lista);
-    printf("\n\nCantidad de nodos en lista: %i\n", i);
+    validos = contaNodos(lista);
+    printf("\n\nCANTIDAD DE NODOS GENERADOS: %i\n", validos);
+
+    //PUNTO 4
+    while (loop == 0)
+    {
+        printf("\nINGRESE LA POSICION A ELIMINAR\n");
+        scanf("%i", &posi);
+
+        if (posi <= validos && posi != 0)
+        {
+            lista = borrarNodoPosi(lista, posi);
+            loop = 1;
+        }
+        else
+        {
+            printf("\n\nPOSICION INVALIDA, INGRESE NUEVAMENTE \n\n");
+
+        }
+    }
+    printf("LISTA CON DICHO NODO ELIMINADO\n");
+    mostrarLista(lista);
 
     return 0;
 }
@@ -65,10 +87,12 @@ stNodo * cargarListaRand(stNodo * lista)
     stNodo * nuevoNodo;
     int aux1, aux2, i;
 
-    printf("CUANTOS NUMEROS DESEAN QUE SE CARGUE\n");
-    scanf("%i", &aux1);
+    /*printf("CUANTOS NUMEROS DESEAN QUE SE CARGUE\n");
+    scanf("%i", &aux1);*/
 
     srand(time(NULL));
+
+    aux1 = (rand() % 10)+1;
 
 
     for (i=0; i<aux1; i++)
@@ -148,4 +172,38 @@ int contaNodos(stNodo * lista)
 
     }
     return i;
+}
+
+
+stNodo * borrarNodoPosi(stNodo * lista, int posi)
+{
+    stNodo * aux;
+    stNodo * ante;
+    int i = 1;
+
+    if (lista != NULL &&i == posi)
+    {
+        aux = lista;
+        lista = lista->siguiente;
+        free(aux);
+    }
+    else
+    {
+        aux = lista;
+        while ((aux != NULL) && (i != posi))
+        {
+            ante = aux;
+            aux = aux->siguiente;
+            i++;
+        }
+
+        if (i == posi)
+        {
+            ante->siguiente = aux->siguiente;
+            free(aux);
+        }
+
+    }
+
+    return lista;
 }
