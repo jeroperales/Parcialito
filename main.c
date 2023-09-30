@@ -28,7 +28,7 @@ int main()
     int posi;
     int loop = 0;
 
-    //PUNTO 1 Crear una lista enlazada de n�meros enteros positivos al azar, la inserci�n se realiza por el �ltimo nodo.
+    //PUNTO 1 Crear una lista enlazada de numeros enteros positivos al azar, la insercion se realiza por el ultimo nodo.
     stNodo * lista = inicLista();
     lista = cargarListaRand(lista);
     printf("DE IZQUIERDA A DERECHA \n");
