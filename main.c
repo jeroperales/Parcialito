@@ -119,6 +119,7 @@ int main()
 
         listaDoble = simpleADoble(lista, listaDoble);
 
+        printf("\nLISTA DOBLE: \n");
         mostrarListaDoble (listaDoble);
 
         break;
@@ -385,7 +386,7 @@ stNodoDoble * simpleADoble(stNodo* lista, stNodoDoble * listaDoble)
         listaDoble = ordenaListaDoble(listaDoble, auxDoble);
         //listaDoble = agregarPrincipioDoble(listaDoble, auxDoble);
     }
-    printf("\nA\n");
+
     return listaDoble;
 }
 
