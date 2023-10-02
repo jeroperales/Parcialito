@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <windows.h>
 
 
 //ESTRUCTURAS NODOS
@@ -33,16 +34,16 @@ void mostrarListaRecursivo(stNodo * lista);
 int contaNodos(stNodo * lista);
 stNodo * borrarNodoPosi(stNodo * lista, int posi);
 stNodo * borraNodosMayores (stNodo * lista, int limite);
-/*
+
 stNodoDoble * crearNodoDoble(int num);
 stNodoDoble * agregarPrincipioDoble (stNodoDoble * lista, stNodoDoble * nuevo);
 stNodoDoble * pasarEnOrden(stNodoDoble * listaDoble, stNodo * lista);
 void mostrarListaDoble(stNodoDoble * lista);
-int borrarUltimoSimple(stNodo * lista);
+stNodo* borrarUltimoSimple(stNodo* lista);
 stNodoDoble * simpleADoble(stNodo * lista, stNodoDoble * listaDoble);
 stNodoDoble* ordenaListaDoble(stNodoDoble* lista, stNodoDoble* nuevoNodo);
 stNodoDoble * inicListaDoble();
-*/
+
 
 int main()
 {
@@ -52,7 +53,7 @@ int main()
     int limite;
     int loop = 0;
     int opc;
-//    stNodoDoble * listaDoble = inicListaDoble();
+    stNodoDoble * listaDoble = inicListaDoble();
 
 
     //PUNTO 1 Crear una lista enlazada de numeros enteros positivos al azar, la insercion se realiza por el ultimo nodo.
@@ -116,9 +117,9 @@ int main()
 
     case 3:
 
-/*        listaDoble = simpleADoble(lista, listaDoble);
+        listaDoble = simpleADoble(lista, listaDoble);
 
-        mostrarListaDoble (listaDoble);*/
+        mostrarListaDoble (listaDoble);
 
         break;
 
@@ -304,7 +305,7 @@ stNodo * borraNodosMayores (stNodo * lista, int limite)
     return lista;
 }
 
-/*
+
 stNodoDoble* crearNodoDoble(int num)
 {
     stNodoDoble* aux = (stNodoDoble*)malloc(sizeof(stNodoDoble));
@@ -359,42 +360,32 @@ void mostrarListaDoble(stNodoDoble * lista)
     }
 }
 
-int borrarUltimoSimple(stNodo * lista)
+stNodo* borrarUltimoSimple(stNodo* lista)
 {
-    stNodo * aux = lista;
-    stNodo * ante;
-
-    int ultimo;
-    while (aux->siguiente!=NULL)
-    {
-        ante = aux;
-        aux = aux->siguiente;
-
+    stNodo* aux = lista;
+    if(lista && lista->siguiente){
+        lista = lista->siguiente;
+        aux = NULL;
+        free(aux);
     }
-
-    ultimo = aux->num;
-    ante->siguiente = NULL;
-
-    free(aux);
-
-    return ultimo;
+    else{
+        lista = NULL;
+        free(lista);
+    }
+    return lista;
 }
 
-stNodoDoble * simpleADoble(stNodo * lista, stNodoDoble * listaDoble)
+stNodoDoble * simpleADoble(stNodo* lista, stNodoDoble * listaDoble)
 {
-
     stNodoDoble * auxDoble ;
-    int dato;
-    while (lista !=NULL)
+    while (lista != NULL)
     {
-
-        dato = borrarUltimoSimple(lista);
-        auxDoble = crearNodoDoble(dato);
+        auxDoble = crearNodoDoble(lista->num);
+        lista = borrarUltimoSimple(lista);
         listaDoble = ordenaListaDoble(listaDoble, auxDoble);
-        // listaDoble = agregarPrincipioDoble(listaDoble, auxDoble);
-        printf("    %i    ", lista->num);
+        //listaDoble = agregarPrincipioDoble(listaDoble, auxDoble);
     }
-
+    printf("\nA\n");
     return listaDoble;
 }
 
@@ -438,4 +429,4 @@ stNodoDoble * inicListaDoble()
 {
     return NULL;
 }
-*/
+
